@@ -1,3 +1,6 @@
+/**
+ * @author enguerrand DE SMET
+ */
 public class Exo01 {
     public static void main(String[] args) {
         
@@ -7,7 +10,7 @@ public class Exo01 {
         System.out.println(s.length());
 
         // s est de type String
-        // java déduit le type depuis les objets que la variable manipule ici "toto"
+        // java déduit le type depuis les objets que la variable manipule ici "toto" via une compilation à la volé
 
         // ----- 02 -----
 
@@ -18,7 +21,8 @@ public class Exo01 {
         System.out.println(s1 == s2);
         System.out.println(s1 == s3);
 
-        // ici s1 vaut une chaîne de caractère , s2 de même avec la même référence que celle de s1 ce qui implique (s1 == s2) = true
+        // ici s1 vaut une chaîne de caractère, s2 de même avec la même référence que celle de s1 ce qui implique (s1 == s2) = true
+        // l'opérateur == teste l'égalité de la référence
         // contrairement à s1 et s2 , s3 est alloué en mémoire dans le heap et contient donc une nouvelle référence, bien que sa valeur soit égal à s1 par copie
 
         // ----- 03 -----
@@ -26,7 +30,7 @@ public class Exo01 {
         var s4 = "toto";
         var s5 = new String(s4);
 
-        System.out.println( s4.equals(s5));
+        System.out.println( s4.equals(s5) );
 
         // ----- 04 -----
 
@@ -35,9 +39,9 @@ public class Exo01 {
   
         System.out.println(s6 == s7);
 
-        // ici les deux variables font références au même objet créé dans le stack, 
+        // ici les deux variables font références au même objet créé dans le heap via le système de String Pool, 
         // en effet en java un String est immutable c'est à dire non modifiable et donc java 
-        // ne crée ici qu'un objet qu'il assigne aux deux variables
+        // ne crée ici qu'un objet qu'il assigne aux deux variables par références
 
         // ----- 05 -----
 
@@ -50,5 +54,7 @@ public class Exo01 {
         s8.toUpperCase();
         System.out.println(s8);
 
+        // La method toUpperCase renvoie une nouvelle chaîne de caractères sans modifier la chaîne original à savoir s8
+		// Il faudrait stocker la valeur de retour dans une variable pour pouvoir s'en servir
     }
 }

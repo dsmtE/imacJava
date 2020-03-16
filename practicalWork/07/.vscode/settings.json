@@ -1,0 +1,8 @@
+{
+    "cSpell.enabled": true,
+    "cSpell.enableFiletypes": [
+        "java"
+    ],
+    "cSpell.language": ",fr",
+    "java.dependency.packagePresentation": "flat"
+}

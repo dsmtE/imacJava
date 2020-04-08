@@ -1,3 +1,3 @@
 public interface Fruit {
-    public float price();
+    public abstract int price();
 }

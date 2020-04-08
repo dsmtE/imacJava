@@ -8,7 +8,7 @@ public class Pear implements Fruit {
 	}
 
 	@Override
-	public float price() { return juiceFactor * 3; }
+	public int price() { return juiceFactor * 3; }
 
 	@Override
 	public String toString() {
@@ -20,7 +20,7 @@ public class Pear implements Fruit {
 
         if (o == null) { return false; }
         if (o == this) { return true; }
-        if (!(o instanceof Apple)) { return false; }
+        if (!(o instanceof Pear)) { return false; }
         final Pear p = (Pear) o;
 
         return juiceFactor == p.juiceFactor;

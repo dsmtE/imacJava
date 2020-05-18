@@ -1,43 +1,19 @@
 import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
 
 public class Exo03 {
+    // ----- 03.01 ----- /
+    /*
+    On utilise plutôt la méthode mapToInt au lieu de la méthode map car celle ci retourne explicitement un IntStream au lieu d'un Stream<T> générique
+    Je pense que cela est plus efficace par la suite lors de l'utilisation de notre reduce avec l'interface fonctionnelle Integer::sum pour 
+    compter (évite un cast ou une interpretation inutile de l'objet contenu dans le stream comme les objets sont dans le cas de l'utilisation de mapToInt déjà des Integer)
+    */
+    public static <T> int count3(final List<T> list, final T elem) {
+        return list.stream().filter(v -> v.equals(elem)).mapToInt(x -> 1).reduce(0, Integer::sum); 
+    }
+
+
     public static void main(String[] args) {
-        final List<String> list2 =  new Random(0).ints(1_000_000, 0, 30).mapToObj(Integer::toString).collect(Collectors.toList());
-
-        final int interNb = 1000;
-        System.out.println(" elapsed time " + printAndTime(() -> Exo01.count(list2, "33"), interNb));
-        System.out.println(" elapsed time " + printAndTime(() -> Exo01.count2(list2, "33"), interNb));
-        System.out.println(" elapsed time " + printAndTime(() -> Exo01.count3(list2, "33"), interNb));
-
-        // BONUS try and experiment
-        VarArgsRunnable<Object, Long> countVarargs = a -> Exo01.count((List<String>) a[0], (String) a[1]);
-        System.out.println(" elapsed time " + printAndTimebis(countVarargs, interNb, list2, "20"));
+        final List<String> list = List.of("hello", "world", "hello", "lambda");
+        System.out.println(count3(list, "hello"));
     }
-
-    public static <T> Long printAndTime(final Supplier<T> funct, final int iterations) {
-        Long start = System.nanoTime();
-        for (int i = 0; i < iterations; i++) {
-            funct.get();
-        }
-        Long end = System.nanoTime();
-        
-        return (end - start) / iterations;
-    }
-
-    //BONUS try and experiment
-    @SafeVarargs
-    public static <T, R> Long printAndTimebis(final VarArgsRunnable<T, R> funct, final int iterations, T...args) {
-        Long start = System.nanoTime();
-        for (int i = 0; i < iterations; i++) {
-            funct.apply(args);
-        }
-        Long end = System.nanoTime();
-        
-        return (end - start) / iterations;
-    }
-
 }
